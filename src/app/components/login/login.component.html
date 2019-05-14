@@ -1,0 +1,23 @@
+<div class="col-md-4">
+  <h3>Please enter your credentials.</h3>
+  <form id="loginForm" (ngSubmit)="login()" [formGroup]="loginFormGroup">
+    <div class="form-row">
+      <div class="form-group">
+        <input class="form-control" formControlName="username" type="text" id="username" placeholder="Username">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <input class="form-control" formControlName="password" type="password" id="password" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <input [disabled]="!loginFormGroup.valid" class="btn btn-lg btn-block btn-secondary" type="submit" value="Login">
+      </div>
+    </div>
+    <div class="form-row">
+      {{message}}
+    </div>
+  </form>
+</div>

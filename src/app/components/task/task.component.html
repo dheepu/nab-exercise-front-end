@@ -1,0 +1,62 @@
+<div>
+  <div class="col-md-4" *ngIf="authenticationService.currentUserValue.user.manager==true">
+    <div class="row">
+      <form id="taskForm" [formGroup]="taskForm" (ngSubmit)="addUpdateTask()">
+        <input type="hidden" formControlName="_id">
+        <div class="form-row">
+          <div class="form-group">
+            <input class="form-control" placeholder="Title" id="title" formControlName="title" type="text">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <input class="form-control" placeholder="details" id="title" formControlName="details" type="text">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <input class="form-control" placeholder="DueDate" id="duedate" formControlName="dueDate" type="date">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <input [disabled]="!taskForm.valid" *ngIf="taskForm.value._id" type="submit" class="btn btn-lg btn-block btn-secondary"
+              value="Update">
+            <input [disabled]="!taskForm.valid" *ngIf="!taskForm.value._id" type="submit" class="btn btn-lg btn-block btn-secondary"
+              value="Add">
+          </div>
+          <div class="form-group col-md-4">
+            <input type="button" (click)="reset()" class="btn btn-lg btn-block btn-secondary" value="Reset">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row">
+      <span style="font-weight:bold">{{message}}</span>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <table class="table table-sm table-hover">
+      <tr>
+        <td style="font-weight:bold">Title</td>
+        <td style="font-weight:bold">Details</td>
+        <td style="font-weight:bold">Due date</td>
+        <td style="font-weight:bold">Completed date</td>
+      </tr>
+      <tr *ngFor="let task of taskService.taskList">
+        <td>{{task.title}}</td>
+        <td>{{task.details}}</td>
+        <td>{{task.dueDate}}</td>
+        <td>{{task.completedDate}}</td>
+        <td>
+          <a class="btn btn-lg btn-block" style="cursor:pointer" *ngIf="authenticationService.currentUserValue.user.manager==true"
+            (click)="showEdit(task)" class="button">Edit</a>
+        </td>
+        <td>
+          <a class="btn btn-lg btn-block" style="cursor:pointer" *ngIf="authenticationService.currentUserValue.user.manager==true"
+            (click)="completeTask(task)" class="button">Complete</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

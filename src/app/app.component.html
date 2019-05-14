@@ -1,0 +1,19 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Task Management</a>
+    </div>
+    <ul *ngIf="!authenticationService.currentUserValue" class="nav navbar-nav navbar-right">
+      <li><a routerLink='/login'>Login</a></li>
+      <li><a routerLink='/register'>Register</a></li>
+    </ul>
+    <ul *ngIf="authenticationService.currentUserValue" class="nav navbar-nav navbar-right">
+      <li><a (click)="logout()" style="cursor:pointer" class="logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
